@@ -1,4 +1,5 @@
 import './scss/app.scss';
+import pizzas from './assets/pizzas.json';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
@@ -16,13 +17,20 @@ const App = () => {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <PizzaBlock title='Мексиканская' price={500} />
-            <PizzaBlock title='Гавайская' price={700} />
+            {pizzas.map((item) => (
+              <PizzaBlock
+                title={item.title}
+                price={item.price}
+                image={item.imageUrl}
+                sizes={item.sizes}
+                types={item.types}
+              />
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
