@@ -1,9 +1,11 @@
 import './scss/app.scss';
-import pizzas from './assets/pizzas.json';
+
+import { Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
-import Categories from './components/Categories';
-import Sort from './components/Sort';
-import PizzaBlock from './components/Pizza-block';
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -11,23 +13,11 @@ const App = () => {
       <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzas.map((item) => (
-              <PizzaBlock
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.imageUrl}
-                sizes={item.sizes}
-                types={item.types}
-              />
-            ))}
-          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/сart" element={<Cart />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </div>
