@@ -19,6 +19,7 @@ const App = () => {
           <div className="content__items">
             {pizzas.map((item) => (
               <PizzaBlock
+                key={item.id}
                 title={item.title}
                 price={item.price}
                 image={item.imageUrl}
