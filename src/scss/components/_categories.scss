@@ -3,12 +3,20 @@
 .categories {
   ul {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    @media screen and (max-width: 435px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      height: 175px;
+      overflow-y: scroll;
+    }
 
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
       border-radius: 30px;
-      margin-right: 10px;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;

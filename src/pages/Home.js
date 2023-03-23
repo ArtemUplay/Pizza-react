@@ -17,13 +17,15 @@ const Home = () => {
       const items = await checkResponse(response);
       setItems(items);
       setIsLoading(false);
+
+      window.scrollTo(0, 0);
     };
 
     getItems();
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -43,7 +45,7 @@ const Home = () => {
               />
             ))}
       </div>
-    </>
+    </div>
   );
 };
 

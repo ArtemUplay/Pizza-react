@@ -4,10 +4,20 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+  @media screen and (max-width: 650px) {
+    padding: 20px 0;
+  }
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width: 650px) {
+      flex-direction: column;
+      align-items: start;
+      gap: 20px;
+    }
   }
 
   &__logo {
@@ -15,6 +25,10 @@
 
     img {
       margin-right: 15px;
+
+      @media screen and (max-width: 650px) {
+        width: 30px;
+      }
     }
 
     h1 {
@@ -23,10 +37,18 @@
       letter-spacing: 1%;
       text-transform: uppercase;
       font-weight: 800;
+
+      @media screen and (max-width: 650px) {
+        font-size: 20px;
+      }
     }
 
     p {
       color: #7b7b7b;
+
+      @media screen and (max-width: 650px) {
+        font-size: 15px;
+      }
     }
   }
 }
