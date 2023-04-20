@@ -10,10 +10,22 @@ import { checkResponse } from '../utils/utils';
 const Home = ({ searchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState({
+    name: 'популярности',
+    sortProperty: 'rating',
+  });
+
+  const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+  const sortBy = sortType.sortProperty.replace('-', '');
+  const category = categoryId > 0 ? `${categoryId}` : '';
 
   useEffect(() => {
+    setIsLoading(true);
     const getItems = async () => {
-      const response = await fetch('https://641ac58ef398d7d95d5e1fa0.mockapi.io/items');
+      const response = await fetch(
+        `https://641ac58ef398d7d95d5e1fa0.mockapi.io/items?category=${category}&sortBy=${sortBy}&order=${order}`
+      );
       const items = await checkResponse(response);
       setItems(items);
       setIsLoading(false);
@@ -22,13 +34,13 @@ const Home = ({ searchValue }) => {
     };
 
     getItems();
-  }, []);
+  }, [categoryId, sortType]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories categoryId={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
+        <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
