@@ -1,0 +1,43 @@
+.form {
+  position: relative;
+  left: -150px;
+
+  &__field {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 40px;
+    width: 400px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.15s ease-in-out;
+
+    &:focus {
+      border: 1px solid rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__search-icon {
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    opacity: 0.5;
+  }
+
+  &__clear-button {
+    height: 22px;
+    width: 22px;
+    opacity: 0.3;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

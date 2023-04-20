@@ -7,7 +7,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 
 import { checkResponse } from '../utils/utils';
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,16 +34,24 @@ const Home = () => {
       <div className="content__items">
         {isLoading
           ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-          : items.map((item) => (
-              <PizzaBlock
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.imageUrl}
-                sizes={item.sizes}
-                types={item.types}
-              />
-            ))}
+          : items
+              .filter((item) => {
+                if (item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+                  return true;
+                }
+
+                return false;
+              })
+              .map((item) => (
+                <PizzaBlock
+                  key={item.id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.imageUrl}
+                  sizes={item.sizes}
+                  types={item.types}
+                />
+              ))}
       </div>
     </div>
   );
