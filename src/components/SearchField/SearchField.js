@@ -1,7 +1,11 @@
-import React from 'react';
-import styles from './SearchField.module.scss';
+import { useContext } from 'react';
 
-function SearchField({ searchValue, setSearchValue }) {
+import styles from './SearchField.module.scss';
+import { SearchContext } from '../../App';
+
+function SearchField() {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
+
   return (
     <form className={styles.form}>
       <svg
