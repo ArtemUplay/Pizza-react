@@ -1,9 +1,9 @@
 function checkResponse(response) {
-  if (response.ok) {
-    return response.json();
+  if (response.statusText === 'OK') {
+    return response;
   }
 
-  return Promise.reject(`Произошла ошибка: ${response.status}`);
+  throw new Error(`Произошла ошибка: ${response.status}`);
 }
 
 export { checkResponse };

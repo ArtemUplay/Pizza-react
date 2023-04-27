@@ -1,10 +1,31 @@
-import { useContext } from 'react';
+import { useContext, useRef, useCallback, useState } from 'react';
+import debounce from 'lodash.debounce';
 
 import styles from './SearchField.module.scss';
 import { SearchContext } from '../../App';
 
 function SearchField() {
+  const [value, setValue] = useState('');
   const { searchValue, setSearchValue } = useContext(SearchContext);
+  const inputRef = useRef(null);
+
+  const onClickClear = () => {
+    setSearchValue('');
+    setValue('');
+    inputRef.current.focus();
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 300),
+    []
+  );
+
+  const onChangeInput = (evt) => {
+    setValue(evt.target.value);
+    updateSearchValue(evt.target.value);
+  };
 
   return (
     <form className={styles.form}>
@@ -41,13 +62,14 @@ function SearchField() {
       </svg>
       <input
         className={styles.form__field}
+        ref={inputRef}
         type="text"
         placeholder="Поиск пиццы..."
-        value={searchValue}
-        onChange={(evt) => setSearchValue(evt.target.value)}
+        value={value}
+        onChange={onChangeInput}
       />
-      {searchValue && (
-        <button onClick={() => setSearchValue('')} className={styles['form__clear-button']} type="button">
+      {value && (
+        <button onClick={onClickClear} className={styles['form__clear-button']} type="button">
           <svg className={styles['form__clear-icon']} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
           </svg>

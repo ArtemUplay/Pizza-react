@@ -1,26 +1,38 @@
 import { useState, useEffect, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 
-import { checkResponse } from '../utils/utils';
 import { APIURL } from '../constants/constants';
 import { SearchContext } from '../App';
 import Pagination from '../components/Pagination/Pagination';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const { searchValue } = useContext(SearchContext);
+  const categoryId = useSelector((store) => store.filter.categoryId);
+  const sortType = useSelector((store) => store.filter.sort.sortProperty);
+  const currentPage = useSelector((store) => store.filter.currentPage);
+  // console.log(currentPage);
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
+
+  const onChangePage = (currentPage) => {
+    dispatch(setCurrentPage(currentPage));
+  };
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState({
-    name: 'популярности',
-    sortProperty: 'rating',
-  });
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const url = new URL(APIURL);
 
@@ -28,16 +40,21 @@ const Home = () => {
   url.searchParams.append('page', `${currentPage}`);
   url.searchParams.append('limit', '4');
   url.searchParams.append('category', `${categoryId > 0 ? categoryId : ''}`);
-  url.searchParams.append('orderBy', `${sortType.sortProperty.replace('-', '')}`);
-  url.searchParams.append('order', `${sortType.sortProperty.includes('-') ? 'asc' : 'desc'}`);
+  url.searchParams.append('orderBy', `${sortType.replace('-', '')}`);
+  url.searchParams.append('order', `${sortType.includes('-') ? 'asc' : 'desc'}`);
 
   useEffect(() => {
     setIsLoading(true);
     const getItems = async () => {
-      const response = await fetch(`${url}`);
-      const items = await checkResponse(response);
-      setItems(items);
-      setIsLoading(false);
+      try {
+        const items = await axios.get(`${url}`);
+        setItems(items.data);
+        setIsLoading(false);
+      } catch (error) {
+        throw new Error(`Произошла ошибка: ${error}`);
+      } finally {
+        setIsLoading(false);
+      }
 
       // window.scrollTo(0, 0);
     };
@@ -48,8 +65,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories categoryId={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
-        <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)} />
+        <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
@@ -66,7 +83,7 @@ const Home = () => {
               />
             ))}
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };
