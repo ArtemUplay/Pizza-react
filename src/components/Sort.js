@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType } from '../redux/slices/filterSlice';
 
@@ -14,6 +14,7 @@ export const filterListNames = [
 const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector((store) => store.filter.sort);
+  const sortRef = useRef(null);
 
   const [isVisible, setVisible] = useState(false);
 
@@ -23,8 +24,24 @@ const Sort = () => {
     setVisible(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setVisible(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    // Данный обработчик событий надо удалять, так как если не удалять
+    // то при каждом ререндере компонента Sort будет создавать ещё слушатель и так далее
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <div className="sort__label-wrapper">
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
