@@ -15,6 +15,7 @@ import { APIURL } from '../constants/constants';
 import { SearchContext } from '../App';
 import Pagination from '../components/Pagination/Pagination';
 import { filterListNames } from '../components/Sort';
+import { setItems, fetchPizzas } from '../redux/slices/pizzasSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,11 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [items, setItems] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const { searchValue } = useContext(SearchContext);
+  const { items, status } = useSelector((store) => store.pizza);
   const categoryId = useSelector((store) => store.filter.categoryId);
   const sortType = useSelector((store) => store.filter.sort.sortProperty);
   const currentPage = useSelector((store) => store.filter.currentPage);
@@ -46,17 +48,8 @@ const Home = () => {
   url.searchParams.append('orderBy', `${sortType.replace('-', '')}`);
   url.searchParams.append('order', `${sortType.includes('-') ? 'asc' : 'desc'}`);
 
-  const fetchPizzas = async () => {
-    setIsLoading(true);
-    try {
-      const items = await axios.get(`${url}`);
-      setItems(items.data);
-      setIsLoading(false);
-    } catch (error) {
-      throw new Error(`Произошла ошибка: ${error}`);
-    } finally {
-      setIsLoading(false);
-    }
+  const getPizzas = () => {
+    dispatch(fetchPizzas({ url }));
   };
 
   // Если был первый рендер, то проверяем URL-параметры и сохраняем в Redux
@@ -79,7 +72,7 @@ const Home = () => {
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
 
     isSearch.current = false;
@@ -107,21 +100,31 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-          : items.map((item) => (
-              <PizzaBlock
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.imageUrl}
-                sizes={item.sizes}
-                types={item.types}
-              />
-            ))}
-      </div>
+      {status === 'error' ? (
+        <div className="content__error-info">
+          <h2>
+            Произошла ошибка <icon>😕</icon>
+          </h2>
+          <p>К сожалению, не удалось получить питсы. Попробуйте повторить попытку позже</p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === 'loading'
+            ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+            : items.map((item) => (
+                <PizzaBlock
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.imageUrl}
+                  sizes={item.sizes}
+                  types={item.types}
+                />
+              ))}
+        </div>
+      )}
+
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
