@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { selectFilter, selectSort, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
@@ -11,7 +11,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 
 import { APIURL } from '../constants/constants';
-import { SearchContext } from '../App';
 import Pagination from '../components/Pagination/Pagination';
 import { filterListNames } from '../components/Sort';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzasSlice';
@@ -109,15 +108,16 @@ const Home = () => {
           {status === 'loading'
             ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
             : items.map((item) => (
-                <PizzaBlock
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  price={item.price}
-                  image={item.imageUrl}
-                  sizes={item.sizes}
-                  types={item.types}
-                />
+                <Link to={`/pizza/${item.id}`} key={item.id}>
+                  <PizzaBlock
+                    id={item.id}
+                    title={item.title}
+                    price={item.price}
+                    image={item.imageUrl}
+                    sizes={item.sizes}
+                    types={item.types}
+                  />
+                </Link>
               ))}
         </div>
       )}
