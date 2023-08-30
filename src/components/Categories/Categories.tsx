@@ -1,6 +1,7 @@
+import React from 'react';
 import { ICategoriesProps } from './Categories.types';
 
-const Categories = ({ categoryId, onChangeCategory }: ICategoriesProps) => {
+const CategoriesComponent = ({ categoryId, onChangeCategory }: ICategoriesProps) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
@@ -17,5 +18,7 @@ const Categories = ({ categoryId, onChangeCategory }: ICategoriesProps) => {
     </div>
   );
 };
+
+const Categories = React.memo(CategoriesComponent);
 
 export default Categories;

@@ -1,4 +1,5 @@
-export interface IfilterListNamesItem {
-  name: string;
-  sortProperty: string;
+import { ISort } from '../../redux/slices/filterSlice/filterSlice.types';
+
+export interface ISortProps {
+  sort: ISort;
 }

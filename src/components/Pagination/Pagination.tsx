@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 import { IPaginationProps } from './Pagination.types';
 
-const Pagination = ({ currentPage, onChangePage }: IPaginationProps) => {
+const PaginationComponent = ({ currentPage, onChangePage }: IPaginationProps) => {
   return (
     <ReactPaginate
       className={styles.pagination}
@@ -22,5 +22,7 @@ const Pagination = ({ currentPage, onChangePage }: IPaginationProps) => {
     />
   );
 };
+
+const Pagination = React.memo(PaginationComponent);
 
 export default Pagination;

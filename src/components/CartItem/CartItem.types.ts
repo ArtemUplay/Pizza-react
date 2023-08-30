@@ -1,7 +1,7 @@
 export interface ICartItemsProps {
   id: string;
   title: string;
-  type: number;
+  type: string;
   size: number;
   count: number;
   imageUrl: string;

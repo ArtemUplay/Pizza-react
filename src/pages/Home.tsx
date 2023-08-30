@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useWhyDidYouUpdate } from 'ahooks';
 
 import {
   selectFilter,
@@ -33,17 +34,17 @@ const Home = () => {
   // const [isLoading, setIsLoading] = useState(true);
 
   const { items, status } = useSelector(selectPizzaData);
-  const { categoryId, currentPage, searchValue } = useSelector(selectFilter);
+  const { categoryId, currentPage, searchValue, sort } = useSelector(selectFilter);
   const { sortProperty: sortType } = useSelector(selectSort);
   const url = new URL(APIURL);
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
-  const onChangePage = (currentPageNumber: number) => {
+  const onChangePage = useCallback((currentPageNumber: number) => {
     dispatch(setCurrentPage(currentPageNumber));
-  };
+  }, []);
 
   url.searchParams.append('title', `${searchValue ? searchValue : ''}`);
   url.searchParams.append('page', `${currentPage}`);
@@ -107,7 +108,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort sort={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (
@@ -121,16 +122,19 @@ const Home = () => {
         <div className="content__items">
           {status === 'loading'
             ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-            : items.map((item: any) => (
-                <PizzaBlock
-                  id={item.id}
-                  title={item.title}
-                  price={item.price}
-                  imageUrl={item.imageUrl}
-                  sizes={item.sizes}
-                  types={item.types}
-                />
-              ))}
+            : items.map((item) => {
+                return (
+                  <PizzaBlock
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    price={item.price}
+                    imageUrl={item.imageUrl}
+                    sizes={item.sizes}
+                    types={item.types}
+                  />
+                );
+              })}
         </div>
       )}
 

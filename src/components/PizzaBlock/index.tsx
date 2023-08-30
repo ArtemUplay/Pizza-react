@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlice/cartSlice';
 import { IPizzaBlockProps } from './index.types';
@@ -15,15 +15,15 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }: IPizzaBlockPro
 
   const addedCount = cartItem ? cartItem.count : 0;
 
-  const onClickAdd = (evt: any) => {
-    const item: ICartItem = {
+  const onClickAdd = () => {
+    const item = {
       id,
       title,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
-    };
+    } as ICartItem;
 
     dispatch(addItem(item));
   };

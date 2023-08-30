@@ -7,8 +7,8 @@ import { selectCart } from '../../redux/slices/cartSlice/cartSlice';
 
 const Header = () => {
   const { cartItems, totalPrice } = useSelector(selectCart);
-  const totalCount = cartItems.reduce((sum: number, item: any) => {
-    return item.count + sum;
+  const totalCount = cartItems.reduce((sum: number, item) => {
+    return item.count! + sum;
   }, 0);
 
   const { pathname } = useLocation();
@@ -25,7 +25,7 @@ const Header = () => {
             </div>
           </div>
         </Link>
-        <SearchField />
+        {pathname !== '/cart' && <SearchField />}
         <div className="header__cart">
           {pathname !== '/cart' && (
             <Link to="/cart" className="button button--cart">

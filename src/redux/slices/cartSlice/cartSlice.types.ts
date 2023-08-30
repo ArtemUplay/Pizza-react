@@ -10,5 +10,5 @@ export interface ICartItem {
   size: number;
   imageUrl: string;
   price: number;
-  count?: number;
+  count: number;
 }

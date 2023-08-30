@@ -1,7 +1,9 @@
+import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectSort, setSortType } from '../../redux/slices/filterSlice/filterSlice';
+import { useDispatch } from 'react-redux';
+import { setSortType } from '../../redux/slices/filterSlice/filterSlice';
 import { ISort, SortPropertyEnum } from '../../redux/slices/filterSlice/filterSlice.types';
+import { ISortProps } from './Sort.types';
 
 export const filterListNames: ISort[] = [
   { name: 'популярности (desc)', sortProperty: SortPropertyEnum.RATING_DESC },
@@ -12,9 +14,8 @@ export const filterListNames: ISort[] = [
   { name: 'алфавиту (ask)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-const Sort = () => {
+const SortComponent = ({ sort }: ISortProps) => {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
   const sortRef = useRef<HTMLDivElement>(null);
 
   const [isVisible, setVisible] = useState(false);
@@ -74,5 +75,7 @@ const Sort = () => {
     </div>
   );
 };
+
+const Sort = React.memo(SortComponent);
 
 export default Sort;
