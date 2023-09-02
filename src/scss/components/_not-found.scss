@@ -1,0 +1,32 @@
+.not-found {
+  max-width: 750px;
+  padding: 100px;
+  margin: 0 auto;
+  text-align: center;
+
+  @media screen and (max-width: 700px) {
+    padding: 0px;
+  }
+
+  &__title {
+    @media screen and (max-width: 700px) {
+      font-size: 24px;
+    }
+
+    @media screen and (max-width: 520px) {
+      font-size: 18px;
+    }
+  }
+
+  span {
+    font-size: 64px;
+  }
+
+  &__description {
+    font-size: 22px;
+
+    @media screen and (max-width: 520px) {
+      font-size: 18px;
+    }
+  }
+}

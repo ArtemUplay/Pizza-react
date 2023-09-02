@@ -28,7 +28,7 @@ const FullPizza = () => {
   }
 
   return (
-    <div className="container">
+    <div className="full-pizza">
       <img src={currentPizza.imageUrl} alt={currentPizza.title} />
       <h2>{currentPizza.title}</h2>
       <h4>{currentPizza.price} ₽</h4>

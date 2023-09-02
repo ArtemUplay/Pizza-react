@@ -8,7 +8,7 @@ const initialState: IFilterSliceState = {
   currentPage: 1,
   sort: {
     name: 'популярности',
-    sortProperty: SortPropertyEnum.RATING_ASC,
+    sortProperty: SortPropertyEnum.RATING_DESC,
   },
 };
 

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlice/cartSlice';
 import { IPizzaBlockProps } from './index.types';
@@ -38,14 +38,26 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }: IPizzaBlockPro
         <div className="pizza-block__selector">
           <ul>
             {types.map((typeIndex) => {
-              return (
-                <li
-                  key={typeIndex}
-                  onClick={() => setActiveTypes(typeIndex)}
-                  className={activeType === typeIndex ? 'active' : ''}>
-                  {typeNames[typeIndex]}
-                </li>
-              );
+              console.log(typeIndex);
+              if (types.length === 1 && types[0] === 1) {
+                return (
+                  <li
+                    key={typeIndex}
+                    onClick={() => setActiveTypes(typeIndex)}
+                    className={typeIndex === 1 ? 'active' : ''}>
+                    {typeNames[typeIndex]}
+                  </li>
+                );
+              } else {
+                return (
+                  <li
+                    key={typeIndex}
+                    onClick={() => setActiveTypes(typeIndex)}
+                    className={activeType === typeIndex ? 'active' : ''}>
+                    {typeNames[typeIndex]}
+                  </li>
+                );
+              }
             })}
           </ul>
           <ul>

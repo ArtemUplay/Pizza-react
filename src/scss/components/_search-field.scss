@@ -1,12 +1,23 @@
 .form {
+  position: relative;
+
   &__field {
+    display: block;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 12px 40px;
-    width: 400px;
-    max-width: 100%;
+    width: 400px; /* Устанавливаем начальную ширину в 400px */
+    max-width: 100%; /* Убираем максимальную ширину */
     border-radius: 10px;
     font-size: 16px;
     transition: all 0.15s ease-in-out;
+
+    @media screen and (max-width: 500px) {
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: 380px) {
+      max-width: 280px;
+    }
 
     &:focus {
       border: 1px solid rgba(0, 0, 0, 0.4);

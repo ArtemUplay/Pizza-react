@@ -6,12 +6,12 @@ import { ISort, SortPropertyEnum } from '../../redux/slices/filterSlice/filterSl
 import { ISortProps } from './Sort.types';
 
 export const filterListNames: ISort[] = [
-  { name: 'популярности (desc)', sortProperty: SortPropertyEnum.RATING_DESC },
-  { name: 'популярности (ask)', sortProperty: SortPropertyEnum.RATING_ASC },
-  { name: 'цене (desc)', sortProperty: SortPropertyEnum.PRICE_DESC },
-  { name: 'цене (ask)', sortProperty: SortPropertyEnum.PRICE_ASC },
-  { name: 'алфавиту (desc)', sortProperty: SortPropertyEnum.TITLE_DESC },
-  { name: 'алфавиту (ask)', sortProperty: SortPropertyEnum.TITLE_ASC },
+  { name: 'популярности (по увеличению)', sortProperty: SortPropertyEnum.RATING_DESC },
+  { name: 'популярности (по уменьшению)', sortProperty: SortPropertyEnum.RATING_ASC },
+  { name: 'цене (по увеличению)', sortProperty: SortPropertyEnum.PRICE_DESC },
+  { name: 'цене (по уменьшению)', sortProperty: SortPropertyEnum.PRICE_ASC },
+  { name: 'алфавиту (по увеличению)', sortProperty: SortPropertyEnum.TITLE_DESC },
+  { name: 'алфавиту (по уменьшению)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
 const SortComponent = ({ sort }: ISortProps) => {

@@ -27,16 +27,18 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container">
-        <Link to="/">
-          <div className="header__logo">
-            <img width="38" src={pizzaLogo} alt="Pizza logo" />
-            <div>
-              <h1>React Pizza</h1>
-              <p>самая вкусная пицца во вселенной</p>
+        <div className="header__left-container">
+          <Link to="/">
+            <div className="header__logo">
+              <img width="38" src={pizzaLogo} alt="Pizza logo" />
+              <div>
+                <h1>React Pizza</h1>
+                <p>самая вкусная пицца во вселенной</p>
+              </div>
             </div>
-          </div>
-        </Link>
-        {pathname !== '/cart' && <SearchField />}
+          </Link>
+          {pathname !== '/cart' && <SearchField />}
+        </div>
         <div className="header__cart">
           {pathname !== '/cart' && (
             <Link to="/cart" className="button button--cart">

@@ -10,6 +10,7 @@ const CartItem = ({ id, title, type, size, count, imageUrl, price }: ICartItemsP
     dispatch(
       addItem({
         id,
+        type,
       } as ICartItem)
     );
   };
@@ -26,14 +27,16 @@ const CartItem = ({ id, title, type, size, count, imageUrl, price }: ICartItemsP
 
   return (
     <div className="cart__item">
-      <div className="cart__item-img">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-      </div>
-      <div className="cart__item-info">
-        <h3>{title}</h3>
-        <p>
-          {type}, {size} см.
-        </p>
+      <div className="cart__image-info-wrapper">
+        <div className="cart__item-img">
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        </div>
+        <div className="cart__item-info">
+          <h3>{title}</h3>
+          <p>
+            {type}, {size} см.
+          </p>
+        </div>
       </div>
       <div className="cart__item-count">
         <button

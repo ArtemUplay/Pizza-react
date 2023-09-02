@@ -21,16 +21,8 @@ import { SortPropertyEnum } from '../redux/slices/filterSlice/filterSlice.types'
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-
-  import('../utils/math').then((math) => {
-    console.log(math.add(16, 26));
-  });
-
-  // const [items, setItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
 
   const { items, status } = useSelector(selectPizzaData);
   const { categoryId, currentPage, searchValue, sort } = useSelector(selectFilter);
@@ -120,7 +112,7 @@ const Home = () => {
       ) : (
         <div className="content__items">
           {status === 'loading'
-            ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+            ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
             : items.map((item) => {
                 return (
                   <PizzaBlock

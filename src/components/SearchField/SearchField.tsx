@@ -1,7 +1,6 @@
 import { useRef, useCallback, useState, ChangeEvent } from 'react';
 import debounce from 'lodash.debounce';
 
-import styles from './SearchField.module.scss';
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/filterSlice/filterSlice';
 
@@ -30,9 +29,9 @@ function SearchField() {
   };
 
   return (
-    <form className={styles.form}>
+    <form className="form">
       <svg
-        className={styles['form__search-icon']}
+        className="form__search-icon"
         enableBackground="new 0 0 50 50"
         height="50px"
         id="Layer_1"
@@ -63,7 +62,7 @@ function SearchField() {
         />
       </svg>
       <input
-        className={styles.form__field}
+        className="form__field"
         ref={inputRef}
         type="text"
         placeholder="Поиск пиццы..."
@@ -71,8 +70,8 @@ function SearchField() {
         onChange={onChangeInput}
       />
       {value && (
-        <button onClick={onClickClear} className={styles['form__clear-button']} type="button">
-          <svg className={styles['form__clear-icon']} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <button onClick={onClickClear} className="form__clear-button" type="button">
+          <svg className="form__clear-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
           </svg>
         </button>

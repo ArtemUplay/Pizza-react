@@ -1,8 +1,10 @@
 @import '../variables';
 
 .pizza-block-wrapper {
+  justify-self: center;
   display: flex;
   justify-content: center;
+  max-width: 280px;
 }
 
 .pizza-block {
