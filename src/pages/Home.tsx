@@ -90,19 +90,19 @@ const Home = () => {
   }, [categoryId, sortType, currentPage, searchValue]);
 
   // Если изменили параметры и был первый рендер
-  useEffect(() => {
-    if (isMounted.current) {
-      const queryString = qs.stringify({
-        sortType,
-        categoryId,
-        currentPage,
-      });
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     const queryString = qs.stringify({
+  //       sortType,
+  //       categoryId,
+  //       currentPage,
+  //     });
 
-      navigate(`?${queryString}`);
-    }
+  //     navigate(`?${queryString}`);
+  //   }
 
-    isMounted.current = true;
-  }, [categoryId, sortType, currentPage]);
+  //   isMounted.current = true;
+  // }, [categoryId, sortType, currentPage]);
 
   return (
     <div className="container">
