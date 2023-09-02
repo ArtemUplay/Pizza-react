@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
-import { useWhyDidYouUpdate } from 'ahooks';
 
 import {
   selectFilter,
@@ -12,13 +10,10 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice/filterSlice';
 
-import Categories from '../components/Categories/Categories';
-import Sort from '../components/Sort/Sort';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
+// import Categories from '../components/Categories/Categories';
+import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from '../components';
 
 import { APIURL } from '../constants/constants';
-import Pagination from '../components/Pagination/Pagination';
 import { filterListNames } from '../components/Sort/Sort';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice/pizzasSlice';
 import { useAppDispatch } from '../types';
@@ -26,9 +21,13 @@ import { SortPropertyEnum } from '../redux/slices/filterSlice/filterSlice.types'
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
+
+  import('../utils/math').then((math) => {
+    console.log(math.add(16, 26));
+  });
 
   // const [items, setItems] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
