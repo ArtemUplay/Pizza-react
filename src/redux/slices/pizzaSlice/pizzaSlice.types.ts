@@ -15,7 +15,7 @@ export interface IPizzaItem {
 }
 
 export interface IFetchPizzasParams {
-  url: string;
+  url: URL;
 }
 
 type TPizzaTypes = 0 | 1;

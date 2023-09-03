@@ -44,9 +44,13 @@ body {
 }
 
 .content {
+  flex: 1 1 auto;
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
 
   .container {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
   }
@@ -82,7 +86,6 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: repeat(2, 1fr);
     justify-content: center;
-    align-content: center;
     column-gap: 11px;
 
     @media screen and (max-width: 1400px) {
@@ -214,9 +217,9 @@ body {
     flex-basis: 50%;
     display: flex;
     gap: 10px;
-    order: 1;
 
     @media screen and (max-width: 740px) {
+      order: 1;
       flex-basis: 80%;
       margin: 0px 0px 20px 0px;
     }
@@ -277,7 +280,10 @@ body {
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      order: 3;
+
+      @media screen and (max-width: 740px) {
+        order: 3;
+      }
 
       &-plus {
         width: 40px;
@@ -328,11 +334,11 @@ body {
       justify-content: center;
       flex-basis: 15%;
       justify-self: flex-start;
-      order: 4;
       white-space: nowrap;
 
       @media screen and (max-width: 740px) {
         align-self: flex-start;
+        order: 4;
       }
 
       @media screen and (max-width: 500px) {
@@ -350,10 +356,10 @@ body {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      order: 2;
 
       @media screen and (max-width: 740px) {
         align-self: flex-start;
+        order: 2;
       }
 
       .button {
@@ -476,15 +482,31 @@ body {
     }
   }
 
-  &--empty {
+  &__empty {
+    flex: 1 1 auto;
     margin: 60px auto;
     width: 620px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 992px) {
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: 720px) {
+      width: auto;
+      max-width: 620px;
+    }
 
     h2 {
       font-size: 36px;
       font-weight: 700;
       margin-bottom: 15px;
+
+      @media screen and (max-width: 720px) {
+        font-size: 22px;
+      }
     }
 
     p {
@@ -492,6 +514,10 @@ body {
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
+
+      @media screen and (max-width: 720px) {
+        font-size: 16px;
+      }
     }
 
     icon {
@@ -500,9 +526,20 @@ body {
     }
 
     img {
+      flex: 1 1 auto;
       display: block;
+      object-fit: contain;
       width: 300px;
       margin: 45px auto 60px;
+
+      @media screen and (max-width: 720px) {
+        margin-top: 0px;
+        margin-bottom: 20px;
+      }
+
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
 
     .button--black {
@@ -511,6 +548,10 @@ body {
       margin: 0 auto;
       font-weight: 600;
       font-size: 18px;
+
+      @media screen and (max-width: 720px) {
+        font-size: 16px;
+      }
     }
   }
 }

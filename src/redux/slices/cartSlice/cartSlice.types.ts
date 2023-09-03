@@ -5,6 +5,7 @@ export interface ICartSliceState {
 
 export interface ICartItem {
   id: string;
+  uniqueId: string;
   title: string;
   type: string;
   size: number;

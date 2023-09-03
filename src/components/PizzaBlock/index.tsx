@@ -9,9 +9,10 @@ const typeNames = ['тонкое', 'традиционное'];
 
 const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }: IPizzaBlockProps) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveTypes] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
+  const uniqueId = `${id}_${typeNames[activeType]}_${sizes[activeSize]}`;
+  const cartItem = useSelector(selectCartItemById(uniqueId));
 
   const addedCount = cartItem ? cartItem.count : 0;
 
@@ -23,6 +24,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }: IPizzaBlockPro
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      uniqueId,
     } as ICartItem;
 
     dispatch(addItem(item));
@@ -38,7 +40,6 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }: IPizzaBlockPro
         <div className="pizza-block__selector">
           <ul>
             {types.map((typeIndex) => {
-              console.log(typeIndex);
               if (types.length === 1 && types[0] === 1) {
                 return (
                   <li

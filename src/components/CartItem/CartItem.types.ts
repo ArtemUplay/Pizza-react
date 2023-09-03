@@ -1,5 +1,6 @@
 export interface ICartItemsProps {
   id: string;
+  uniqueId: string;
   title: string;
   type: string;
   size: number;

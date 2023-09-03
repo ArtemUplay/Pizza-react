@@ -1,27 +1,22 @@
 import { useDispatch } from 'react-redux';
-import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice/cartSlice';
+import { minusItem, plusItem, removeItem } from '../../redux/slices/cartSlice/cartSlice';
 import { ICartItemsProps } from './CartItem.types';
-import { ICartItem } from '../../redux/slices/cartSlice/cartSlice.types';
 
-const CartItem = ({ id, title, type, size, count, imageUrl, price }: ICartItemsProps) => {
+const CartItem = ({ id, uniqueId, title, type, size, count, imageUrl, price }: ICartItemsProps) => {
+  console.log(uniqueId);
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(
-      addItem({
-        id,
-        type,
-      } as ICartItem)
-    );
+    dispatch(plusItem(uniqueId));
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem(id));
+    dispatch(minusItem(uniqueId));
   };
 
   const onClickRemove = () => {
     if (window.confirm('Вы действительно хотите удалить товар?')) {
-      dispatch(removeItem(id));
+      dispatch(removeItem(uniqueId));
     }
   };
 

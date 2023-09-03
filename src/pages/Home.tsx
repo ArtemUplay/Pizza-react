@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import qs from 'qs';
 
@@ -98,7 +98,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} />
+        {/* <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} /> */}
         <Sort sort={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>

@@ -3,8 +3,8 @@ import cartEmptyImage from '../../assets/img/empty-cart.png';
 
 const CartEmpty = () => {
   return (
-    <div className="container container--cart">
-      <div className="cart cart--empty">
+    <div className="container container__cart">
+      <div className="cart cart__empty">
         <h2>
           Корзина пустая <span>😕</span>
         </h2>

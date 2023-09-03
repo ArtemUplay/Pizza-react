@@ -21,8 +21,6 @@ const Cart = () => {
     return <CartEmpty />;
   }
 
-  console.log(cartItems);
-
   return (
     <div className="container container--cart">
       <div className="cart">
@@ -83,6 +81,7 @@ const Cart = () => {
         </div>
         <div className="content__items">
           {cartItems.map((item, index) => {
+            console.log(item);
             return <CartItem key={item.id + index} {...item} />;
           })}
         </div>
